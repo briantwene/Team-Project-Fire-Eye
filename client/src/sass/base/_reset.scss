@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,800;1,800&display=swap");
+
+//remove padding and add border box
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+//html set to the height of viewport
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+//body reset
+//height set to 100% of html
+body {
+  height: 100%;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  //global font for application
+  font: {
+    family: "poppins", "roboto", sans-serif;
+  }
+}
+
+//div that contains react app
+#root {
+  height: 100%;
+}
+
+//reset for images
+img {
+  max-width: 100%;
+  display: block;
+}
