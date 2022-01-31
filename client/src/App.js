@@ -1,14 +1,19 @@
+import React from "react";
 import "./css/App.css";
 import Sidebar from "./components/Sidebar";
-import Main from "./components/Main";
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+
 
 function App() {
   return (
     <>
-      <div className="app">
-        <Sidebar />
-        <Main />
-      </div>
+    <Router>
+      <Sidebar/>
+      <Routes>
+        <Route path='/'/>
+      </Routes>
+
+    </Router>
     </>
   );
 }

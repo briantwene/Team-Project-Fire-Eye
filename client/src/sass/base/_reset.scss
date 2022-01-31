@@ -37,3 +37,10 @@ img {
   max-width: 100%;
   display: block;
 }
+
+
+.home, .livestream, .gallery {
+  display: flex;
+  height: 90vh;
+  align-items: center;
+}
