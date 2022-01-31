@@ -10,6 +10,7 @@ function Sidebar() {
       <div className="sub-bar sidebar-bottom">
         <SidebarIcon text={"Settings"} icon={<HiCog />} />
         <SidebarIcon text={"Logout"} icon={<HiLogout />} />
+        <SidebarIcon text = {"Hahahaha"} icon={<HiEye/>}/>
       </div>
     </div>
   );
