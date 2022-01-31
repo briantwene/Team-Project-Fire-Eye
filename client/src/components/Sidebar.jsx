@@ -1,26 +1,60 @@
-import { HiHome, HiEye, HiCog, HiPhotograph, HiLogout } from "react-icons/hi";
-function Sidebar() {
-  return (
-    <div className="sidebar">
-      <div className="sub-bar sidebar-top">
-        <SidebarIcon text={"Home"} icon={<HiHome />} />
-        <SidebarIcon text={"Live Stream"} icon={<HiEye />} />
-        <SidebarIcon text={"Gallery"} icon={<HiPhotograph />} />
-      </div>
-      <div className="sub-bar sidebar-bottom">
-        <SidebarIcon text={"Settings"} icon={<HiCog />} />
-        <SidebarIcon text={"Logout"} icon={<HiLogout />} />
-      </div>
-    </div>
-  );
-}
+import React, {useState} from 'react';
+//Creates states that can be passed in components
+import *as FaIcons from "react-icons/fa";
+import *as AiIcons from "react-icons/ai";
+import { Link } from "react-router-dom"
+import {SidebarData} from './SidebarData'
 
-const SidebarIcon = ({ icon, text }) => (
-  <div className="sidebar-icon">
-    <span className="text">{icon}</span>
-    {/* chile element of the div is given a scale of 100 when the "group"(parent) is hovered over...  */}
-    <span className="text">{text}</span>
-  </div>
-);
+function Sidebar() {
+  const[navbar, setnavbar] = useState(false)
+
+  const shownavbar = () => setnavbar(!navbar)
+
+  return (
+
+    <>
+  
+  
+      <div className="Sidebar">
+      <Link to="#" className='menu-bars'>
+        <FaIcons.FaBars onClick={shownavbar} />
+      </Link>
+
+      </div>
+      {/* state hooks. If icon is clicked we want class to nav menu. Which is showing */}
+
+
+    <nav className ={navbar ? 'nav-menu active': 'nav-menu'}>
+      <ul className='nav-menu-items'>
+        <li className='navbar-toggle'>
+          <Link to ="#" className='menu-bars'>
+          <AiIcons.AiOutlineClose />
+          </Link>
+        </li>
+
+        {SidebarData.map((item, index) => {
+
+          return(
+            <li key={index} className={item.cName}>
+              <Link to={item.path}>
+                {item.icon}
+                <span>{item.title}</span>
+              </Link>
+
+            </li> 
+
+          )
+
+        })}
+
+    
+      </ul>
+
+
+    </nav>
+  
+    </>
+  )
+}
 
 export default Sidebar;
