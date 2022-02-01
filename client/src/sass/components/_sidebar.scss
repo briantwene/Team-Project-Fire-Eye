@@ -2,14 +2,22 @@
   background-color: #0075FF;
   height: 80px;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
+}
+
+.username{
+  display: flex;
+  margin-right: 1rem;
+  order: 2;
+  color: white;
 }
 
 .menu-bars{
   margin-left:2rem;
   font-size: 2rem;
   background: none;
+  order: 1;
 }
 
 .nav-menu {
@@ -20,7 +28,7 @@
   justify-content: center;
   position: fixed;
   top: 0;
-  // left: -100%;
+  left: -100%;
   transition: 850ms;
 
 }
