@@ -38,8 +38,9 @@ img {
   display: block;
 }
 
+//Took settings out. Shouldnt set to flex direction. 
 
-.home, .livestream, .gallery, .settings, .logout {
+.home, .livestream, .gallery, .logout {
   display: flex;
   height: 90vh;
   //align-items: top;

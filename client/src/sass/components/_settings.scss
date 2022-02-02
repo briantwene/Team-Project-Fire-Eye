@@ -1,29 +1,93 @@
-.Wrapper{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    grid-auto-rows: 100px;
-    grid-template-areas: 
-    " a a a a b b b b"
-    " a a a a b b b b"
-    " c c c c c c c c"
+.settings{
+    padding: 20px;
+    height: 100%;
+}
 
+.wrapper{
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+    height: 100%;
+   
+}
+
+.w1{
+    background-color: purple;
+    display: grid;
+    grid-column: 1;
+    grid-row: 1;
     
 }
 
-.one{
-    grid-area: a;
-    align-self: start;
+.w2{
+   background-color: royalblue;
+   display: grid;
+   grid-column: 2;
+   grid-row: 1;
+   
 }
 
 
-.two{
-  grid-area: b;
-  align-self: end;
+.w3{
+   background-color: rgb(233, 142, 62);
+   grid-column: 2;
+   grid-row: 2;
+    
+}
+
+.uname{
+    background-color: skyblue;
+    grid-column: 1;
+    grid-row: 2;
+    
 }
 
 
-.three{
-    grid-area: c;
-    align-self: end;
+#username{
+    font-size: 1rem;
+}
+
+.email{
+    background-color: springgreen;
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#email{
+    font-size: 1rem;
+}
+
+.textpass{
+    color: #c9c9c9;
+    
+}
+
+.textclose{
+    color: #c9c9c9;
+}
+
+
+.iconsC{
+    font-size: 1.5rem;
+}
+
+.profilePic{
+    font-size: 1.5rem;
+
+}
+
+
+.password{
+    
+    color: white;
+    text-align: center;
+    border-radius: 30%;
+    
+
+    // border-radius: 30%;
+    // border-style: solid;
+
+
+    
 }

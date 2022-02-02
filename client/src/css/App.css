@@ -97,7 +97,7 @@ img {
   display: block;
 }
 
-.home, .livestream, .gallery, .settings, .logout {
+.home, .livestream, .gallery, .logout {
   display: flex;
   height: 90vh;
   font-size: 2rem;
@@ -217,4 +217,79 @@ span {
   grid-column: 2/3;
   grid-row: 1/2;
   height: 100%;
+}
+
+.settings {
+  padding: 20px;
+  height: 100%;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 10px;
+  height: 100%;
+}
+
+.w1 {
+  background-color: purple;
+  display: grid;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.w2 {
+  background-color: royalblue;
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.w3 {
+  background-color: #e98e3e;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.uname {
+  background-color: skyblue;
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#username {
+  font-size: 1rem;
+}
+
+.email {
+  background-color: springgreen;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#email {
+  font-size: 1rem;
+}
+
+.textpass {
+  color: #c9c9c9;
+}
+
+.textclose {
+  color: #c9c9c9;
+}
+
+.iconsC {
+  font-size: 1.5rem;
+}
+
+.profilePic {
+  font-size: 1.5rem;
+}
+
+.password {
+  color: white;
+  text-align: center;
+  border-radius: 30%;
 }
