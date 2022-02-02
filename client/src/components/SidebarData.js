@@ -15,7 +15,7 @@ export const SidebarData = [
     },
     {
         title: 'Live Stream',
-        path: '/live stream',
+        path: '/livestream',
         icon: <AiIcons.AiFillEye />,
         cName: 'nav-text'
     },

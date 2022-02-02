@@ -39,8 +39,10 @@ img {
 }
 
 
-.home, .livestream, .gallery {
+.home, .livestream, .gallery, .settings, .logout {
   display: flex;
   height: 90vh;
-  align-items: center;
+  //align-items: top;
+  //justify-content: center;
+  font-size: 2rem;
 }

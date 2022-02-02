@@ -4,6 +4,8 @@ import *as FaIcons from "react-icons/fa";
 import *as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom"
 import {SidebarData} from './SidebarData'
+import { IconContext } from 'react-icons'
+
 
 function Sidebar() {
   const[navbar, setnavbar] = useState(false)
@@ -14,8 +16,12 @@ function Sidebar() {
 
     <>
   
-  
+    <IconContext.Provider value={{color: '#fff'}}>
       <div className="Sidebar">
+        <div className='username'>
+        <h1>Hi FireEye</h1>
+        </div>
+        
       <Link to="#" className='menu-bars'>
         <FaIcons.FaBars onClick={shownavbar} />
       </Link>
@@ -25,7 +31,8 @@ function Sidebar() {
 
 
     <nav className ={navbar ? 'nav-menu active': 'nav-menu'}>
-      <ul className='nav-menu-items'>
+
+      <ul className='nav-menu-items' onClick={shownavbar} >
         <li className='navbar-toggle'>
           <Link to ="#" className='menu-bars'>
           <AiIcons.AiOutlineClose />
@@ -52,7 +59,7 @@ function Sidebar() {
 
 
     </nav>
-  
+    </IconContext.Provider>
     </>
   )
 }
