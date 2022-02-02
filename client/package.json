@@ -9,13 +9,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
-<<<<<<< HEAD
-    "react-scripts": "^3.0.1",
-=======
     "react-router-dom": "^6.2.1",
     "react-scripts": "^3.0.1",
     "sass": "^1.49.0",
->>>>>>> 743703b8a59dceef44071ddc4616953a00976569
     "web-vitals": "^2.1.4"
   },
   "scripts": {
