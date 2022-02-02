@@ -1,10 +1,11 @@
-"use strict"
-const {checkLogin} = require("../controllers/loginController")
-const express = require("express")
+"use strict";
 
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
+
+const { auth } = require("../controllers/loginController");
 
 //route for user login
-router.post("/user", checkLogin )
+router.post("/user", auth);
 
-module.exports = router
+module.exports = router;
