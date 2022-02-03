@@ -5,7 +5,7 @@ exports.auth = (req, res, next) => {
   //use the local strategy to autheticate the user
   //if there are errors the return them
   //otherwise let the user log in
-  passport.auth("local", (err, user, info) => {
+  passport.authenticate("local", (err, user, info) => {
     if (err) {
       return res.status(400).json({ errors: err });
     }

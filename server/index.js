@@ -4,17 +4,16 @@ const app = express();
 
 const port = 3001;
 const mongoose = require("mongoose");
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo")
 
 const passport = require("./services/setupPassport");
 const auth = require("./routes/login");
-const login = require("./routes/auth/login.js");
+const login = require("./routes/login.js");
 const dotenv = require("dotenv");
 dotenv.config();
 
 //connection to database
-mongoose
-  .connect(process.env.dbconn, {
+mongoose.connect(process.env.dbconn, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -29,7 +28,7 @@ app.use(
     secret: "very secret this",
     resave: false,
     saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: MongoStore.create({ mongoUrl: process.env.dbconn }),
   })
 );
 
@@ -39,10 +38,13 @@ app.use(passport.session());
 //setup route for login
 app.use("/auth", login);
 
+//route for testing
 app.get("/", (req, res) => {
   res.send("HELLO");
 });
 
+
+//set the server to listen on the port choosen
 app.listen(port, (err) => {
   if (err) {
     console.log(`error: ${error}`);
