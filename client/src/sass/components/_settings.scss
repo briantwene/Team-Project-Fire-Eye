@@ -13,31 +13,43 @@
 }
 
 .w1{
-    background-color: rgb(226, 131, 43);
+    background-color: #6b615f;
     display: grid;
     grid-column: 1;
     grid-row: 1;
+    padding: 2rem;
+    border-top: 1px solid;
+    border-left: 1px solid;
+
     
 }
 
+// Change Password
 .w2{
-   background-color: rgb(226, 131, 43);
+   
+   background-color: #6b615f;
+   padding: 2rem;
    display: grid;
    grid-column: 2;
    grid-row: 1;
-   
+   border-top: 1px solid;
+   border-left: 1px solid;
 }
 
+// Close Account
 
 .w3{
-   background-color: rgb(233, 142, 62);
+   background-color: #6b615f;
+   padding: 2rem;
    grid-column: 2;
    grid-row: 2;
+   border-top: 1px solid;
+   border-left: 1px solid;
     
 }
 
 .uname{
-    background-color:  rgb(226, 131, 43);
+    
     grid-column: 1;
     grid-row: 2;
     
@@ -49,7 +61,7 @@
 }
 
 .email{
-    background-color: #0075FF;
+    
     grid-column: 2;
     grid-row: 2;
 }
