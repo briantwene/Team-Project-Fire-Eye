@@ -1,14 +1,21 @@
+//import and start express app
 const express = require("express");
 const session = require("express-session");
 const app = express();
 
+//set port number and import mongoDB related modules
 const port = 3001;
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo")
 
+//import all the routes needed
 const passport = require("./services/setupPassport");
 const auth = require("./routes/login");
+const images = require("./routes/images")
+const user = require("./routes/user")
 const login = require("./routes/login.js");
+
+//configure .env file
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -20,9 +27,11 @@ mongoose.connect(process.env.dbconn, {
   .then(() => console.log("connected to fire-eye database"))
   .catch((err) => console.log(err));
 
+//express middleware for parsing json requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+//using the session middleware to create a session id for the user
 app.use(
   session({
     secret: "very secret this",
@@ -37,6 +46,11 @@ app.use(passport.session());
 
 //setup route for login
 app.use("/auth", login);
+
+//setup route for user profile
+app.use("/user", user)
+
+app.use("/footage", images)
 
 //route for testing
 app.get("/", (req, res) => {
