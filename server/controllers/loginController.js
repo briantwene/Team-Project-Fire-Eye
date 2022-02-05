@@ -1,5 +1,5 @@
 const passport = require("passport");
-const router = require("../routes/login");
+
 
 exports.auth = (req, res, next) => {
   //use the local strategy to autheticate the user
@@ -20,3 +20,6 @@ exports.auth = (req, res, next) => {
     });
   })(req, res, next);
 };
+
+
+
