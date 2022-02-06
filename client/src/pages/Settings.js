@@ -9,19 +9,25 @@ function Setting() {
        
 
        <div className='wrapper'>
-         <div className="w1"> <h4 className='profilePic'> <AiIcons.AiOutlineUser/>Profile Details</h4>
+         <div className="w1"> <div className='profilePic'> < AiIcons.AiOutlineUser /><h4>Profile Details</h4> </div>
+
+
+       
 
 
             <div className='uname'> 
-            <label for="username"><h7>Username</h7> </label>
-            <input type="text" id="username" name="username"></input>
+
+            <p className="uname__title">Username</p>
+
+            <p className="uname__user sub_Header"> John Doe</p>
 
             </div>
 
             <div className='email'>
-              <label for="email"><h7>Email</h7></label>
-              <input type="text" id="email" name="email"></input>
-              
+            <p className="email__title">Email</p>
+
+            {/* //Handles multiple functions */}
+            <p className="email__address sub_Header">JohnDoe@gmail.com</p>
               </div>
             
             </div>
