@@ -1,3 +1,4 @@
+"use strict"
 //import and start express app
 const express = require("express");
 const session = require("express-session");
@@ -50,6 +51,7 @@ app.use("/auth", login);
 //setup route for user profile
 app.use("/user", user)
 
+//setup routes for the cctv footage
 app.use("/footage", images)
 
 //route for testing
