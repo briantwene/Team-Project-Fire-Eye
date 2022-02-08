@@ -3,107 +3,161 @@
     height: 100%;
 }
 
+//Dont want redundant code
+.sub_Header{
+    font-size: 1.2rem;
+    font-weight: bold;
+
+}
+
 .wrapper{
     display: grid;
     grid-template-columns: 60% 40%;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 10px;
+    gap: 20px;
     height: 100%;
    
 }
-
+.w1, .w2, .w3{
+    border-radius: 6px;
+}
 .w1{
-    background-color: #6b615f;
+
+    // parent is Uname. & sign looks into that uname targeting user
+
+
+    background-color: white;
     display: grid;
     grid-column: 1;
     grid-row: 1;
     padding: 2rem;
-    border-top: 1px solid;
-    border-left: 1px solid;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+ 
+    .profilePic{
+        display: flex;
+        align-items: center;
 
-    
+        h4{
+            padding-left: 20px   ;
+
+        } 
+            
+    }
+    .uname{
+        grid-column: 1;
+        grid-row: 2;
+        
+    }
+
+
+    .email{
+        grid-column: 2;
+        grid-row: 2;
+    }
 }
 
 // Change Password
 .w2{
    
-   background-color: #6b615f;
+   background-color: white;
    padding: 2rem;
    display: grid;
    grid-column: 2;
    grid-row: 1;
-   border-top: 1px solid;
-   border-left: 1px solid;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   .password{
+       
+       .passRadius{
+           display: inline-block;
+           padding: 15px 20px;
+           border: none;
+           cursor: pointer;
+           &:hover{
+               background-color: #D9843B;
+
+           }
+
+       }
+   }
+   
 }
 
 // Close Account
 
 .w3{
-   background-color: #6b615f;
+    background-color: white;
    padding: 2rem;
+   display: grid;
    grid-column: 2;
    grid-row: 2;
-   border-top: 1px solid;
-   border-left: 1px solid;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    .accountClose{
+       
+       .passRadius{
+           display: inline-block;
+           padding: 15px 20px;
+           border: none;
+           cursor: pointer;
+           &:hover{
+               background-color: #D9843B;
+
+           }
+
+       }
+   }
+}
+
+
+
+
+// #username{
+//     font-size: 1rem;
+// }
+
+// .email{
     
-}
+//     grid-column: 2;
+//     grid-row: 2;
+// }
 
-.uname{
+// #email{
+//     font-size: 1rem;
+// }
+
+
+// .textWrap{
+//     color: #c9c9c9;
+
+// }
+
+
+// .iconsC{
+//     font-size: 1.5rem;
+//     padding: 0.4rem;
+// }
+
+// .profilePic{
+//     font-size: 1.5rem;
+
+// }
+
+
+// .password{
     
-    grid-column: 1;
-    grid-row: 2;
-    
-}
-
-
-#username{
-    font-size: 1rem;
-}
-
-.email{
-    
-    grid-column: 2;
-    grid-row: 2;
-}
-
-#email{
-    font-size: 1rem;
-}
-
-
-.textWrap{
-    color: #c9c9c9;
-
-}
-
-
-.iconsC{
-    font-size: 1.5rem;
-    padding: 0.4rem;
-}
-
-.profilePic{
-    font-size: 1.5rem;
-
-}
-
-
-.password{
-    
-    color: white;
-    text-align: center;
+//     color: white;
+//     text-align: center;
     
     
-}
+// }
 
-.passRadius{
+// .passRadius{
     
-    border-radius: 5px;
-    padding: 0.5rem;
-}
+//     border-radius: 5px;
+//     padding: 0.5rem;
+// }
 
-.accountClose{
-    color: white;
-    text-align: center;
+// .accountClose{
+//     color: white;
+//     text-align: center;
 
-}
+// }

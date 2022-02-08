@@ -136,8 +136,7 @@ img {
 }
 
 .Sidebar {
-  background-color: white;
-  color: #D9843B;
+  background-color: #D9843B;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -153,12 +152,16 @@ img {
 .menu-bars {
   margin-left: 2rem;
   font-size: 2rem;
-  background: none;
+  color: red;
+  background: red;
   order: 1;
+}
+.menu-bars svg {
+  color: red;
 }
 
 .nav-menu {
-  background-color: #D92938;
+  background-color: #D9843B;
   width: 250px;
   height: 100vh;
   display: flex;
@@ -201,6 +204,7 @@ img {
 
 .nav-menu-items {
   width: 100%;
+  background-color: #D9843B;
 }
 
 .navbar-toggle {
@@ -227,87 +231,81 @@ span {
   height: 100%;
 }
 
+.sub_Header {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: 60% 40%;
   grid-template-rows: 1fr 1fr 1fr;
-  gap: 10px;
+  gap: 20px;
   height: 100%;
 }
 
+.w1, .w2, .w3 {
+  border-radius: 6px;
+}
+
 .w1 {
-  background-color: #6b615f;
+  background-color: white;
   display: grid;
   grid-column: 1;
   grid-row: 1;
   padding: 2rem;
-  border-top: 1px solid;
-  border-left: 1px solid;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.w1 .profilePic {
+  display: flex;
+  align-items: center;
+}
+.w1 .profilePic h4 {
+  padding-left: 20px;
+}
+.w1 .uname {
+  grid-column: 1;
+  grid-row: 2;
+}
+.w1 .email {
+  grid-column: 2;
+  grid-row: 2;
 }
 
 .w2 {
-  background-color: #6b615f;
+  background-color: white;
   padding: 2rem;
   display: grid;
   grid-column: 2;
   grid-row: 1;
-  border-top: 1px solid;
-  border-left: 1px solid;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.w2 .password .passRadius {
+  display: inline-block;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+}
+.w2 .password .passRadius:hover {
+  background-color: #D9843B;
 }
 
 .w3 {
-  background-color: #6b615f;
+  background-color: white;
   padding: 2rem;
+  display: grid;
   grid-column: 2;
   grid-row: 2;
-  border-top: 1px solid;
-  border-left: 1px solid;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
-.uname {
-  grid-column: 1;
-  grid-row: 2;
+.w3 .accountClose .passRadius {
+  display: inline-block;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
 }
-
-#username {
-  font-size: 1rem;
-}
-
-.email {
-  grid-column: 2;
-  grid-row: 2;
-}
-
-#email {
-  font-size: 1rem;
-}
-
-.textWrap {
-  color: #c9c9c9;
-}
-
-.iconsC {
-  font-size: 1.5rem;
-  padding: 0.4rem;
-}
-
-.profilePic {
-  font-size: 1.5rem;
-}
-
-.password {
-  color: white;
-  text-align: center;
-}
-
-.passRadius {
-  border-radius: 5px;
-  padding: 0.5rem;
-}
-
-.accountClose {
-  color: white;
-  text-align: center;
+.w3 .accountClose .passRadius:hover {
+  background-color: #D9843B;
 }
 
 .login-container {
@@ -364,4 +362,16 @@ span {
 }
 .login-container .login-btn:hover {
   background-color: #0075eb;
+}
+
+.gallery__items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.gallery__items--item {
+  background: orange;
+}
+.gallery__items--item a img {
+  width: 100%;
 }

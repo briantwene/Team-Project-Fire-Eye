@@ -1,6 +1,6 @@
 .Sidebar {
-  background-color: white;
-  color: #D9843B;
+  background-color: #D9843B;
+  // color: #D9843B;
   height: 80px;
   display: flex;
   justify-content: space-between;
@@ -17,13 +17,17 @@
 .menu-bars{
   margin-left:2rem;
   font-size: 2rem;
-  background: none;
+  color: red;
+  background: red;
   order: 1;
+  svg {
+    color: red;
+  }
   
 }
 
 .nav-menu {
-  background-color:#D92938;
+  background-color:#D9843B;
   width: 250px;
   height: 100vh;
   display: flex;
@@ -70,6 +74,7 @@
 
 .nav-menu-items {
   width: 100%;
+  background-color: #D9843B;
 }
 
 

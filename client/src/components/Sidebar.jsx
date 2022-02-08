@@ -23,7 +23,7 @@ function Sidebar() {
         </div>
         
       <Link to="#" className='menu-bars'>
-        <FaIcons.FaBars onClick={shownavbar} />
+        <FaIcons.FaBars style={{color:'#D9843B'}} onClick={shownavbar} />
       </Link>
 
       </div>
