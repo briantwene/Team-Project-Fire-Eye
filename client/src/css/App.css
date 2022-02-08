@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,800;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap");
 @keyframes enter {
   0% {
     opacity: 0;
@@ -97,7 +98,9 @@ img {
   display: block;
 }
 
-.home, .livestream, .logout {
+.home,
+.livestream,
+.logout {
   display: flex;
   height: 90vh;
   font-size: 2rem;
@@ -307,6 +310,62 @@ span {
 }
 .w3 .accountClose .passRadius:hover {
   background-color: #D9843B;
+}
+
+.login-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.login-container .logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-container .logo-container .logo-text {
+  font-size: 3em;
+  font-family: "Orbitron";
+  color: #ff6b00;
+}
+.login-container .login-form {
+  height: 70%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.login-container .login-form > * {
+  margin: 0rem 3rem;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.login-container .login-title {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+.login-container .label,
+.login-container .field {
+  display: block;
+}
+.login-container .field,
+.login-container .login-btn {
+  font-size: 1.5em;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+.login-container .field:focus {
+  border: 2px solid blue;
+}
+.login-container .login-btn {
+  background-color: #0075ff;
+  color: white;
+  border: none;
+}
+.login-container .login-btn:hover {
+  background-color: #0075eb;
 }
 
 .gallery__items {
