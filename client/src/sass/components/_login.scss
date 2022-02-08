@@ -1,0 +1,80 @@
+@use "sass:color";
+
+//login conatiner
+.login-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  //container for the logo
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .logo-text {
+      font: {
+        size: em(48);
+        family: "Orbitron";
+      }
+      color: $logotext;
+    }
+  }
+
+  // base settings for the form container
+  .login-form {
+    height: 70%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  //settings for all the child elements in the form container
+  .login-form > * {
+    margin: 0rem 3rem;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  //login title
+  .login-title {
+    font: {
+      size: em(24);
+      weight: 600;
+    }
+  }
+
+  //set the containers holding input to block
+  .label,
+  .field {
+    display: block;
+  }
+  .field,
+  .login-btn {
+    font-size: em(24);
+    border-radius: 5px;
+    padding: 0.5rem;
+  }
+
+  //when the input is focused on change the border color to blue
+  .field:focus {
+    border: 2px solid blue;
+  }
+
+  //login button settings
+  .login-btn {
+    background-color: $sidebar;
+    color: white;
+    border: none;
+
+    //change the color of the login when the user hovers
+    //over the button
+    &:hover {
+      background-color: color.adjust($sidebar, $blue: -20);
+    }
+  }
+}

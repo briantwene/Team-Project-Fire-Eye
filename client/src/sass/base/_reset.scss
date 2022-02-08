@@ -1,4 +1,7 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,800;1,800&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap");
 
 //remove padding and add border box
 *,
@@ -38,9 +41,11 @@ img {
   display: block;
 }
 
-//Took settings out. Shouldnt set to flex direction. 
+//Took settings out. Shouldnt set to flex direction.
 
-.home, .livestream, .logout {
+.home,
+.livestream,
+.logout {
   display: flex;
   height: 90vh;
   //align-items: top;
