@@ -1,47 +1,38 @@
 const passport = require("passport");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const { createTokens } = require("../middleware/jwt");
 
-exports.auth = (req, res, next) => {
-  //use the local strategy to autheticate the user
-  //if there are errors the return them
-  //otherwise let the user log in
-  // passport.authenticate("local", (err, user, info) => {
-  //   if (err) {
-  //     return res.status(400).json({ errors: err });
-  //   }
-  //   if (!user) {
-  //     return res.status(400).json({ errors: "No user found" });
-  //   }
-  //   req.logIn(user, function (err) {
-  //     if (err) {
-  //       return res.status(400).json({ errors: err });
-  //     }
-  //     return res.status(200).json({ success: `logged in ${user.id}` });
-  //   });
-  // })(req, res, next);
-
+exports.auth = (req, res) => {
   const { username, password } = req.body;
 
   User.findOne({ username: username }, (err, user) => {
     //if user doesnt exist or there is an error then send error message
-    if (err) {
-      return done(err);
-    } else if (!user) {
-      return res.send({ message: "Wrong username/password" });
+    if (!user) {
+      res.status(400).json({ message: "user doesnt exist" });
     } else {
+      //see if can be made into a promise....
       //otherwise compare the password with that in the database
-      bcrypt.compare(password, user.password, (err, isMatch) => {
-        if (err) throw err;
+      bcrypt.compare(password, user.password).then((isMatch) => {
+        //if there is a match
         if (isMatch) {
-          req.session.user = user;
-          console.log(req.session.user);
+          //create the JWT for the user
+          const accessToken = createTokens(user);
+
+          //store the JWT as a cookie that will expire in an hour
+          res.cookie("access-token", accessToken, {
+            maxAge: 60 * 1000,
+            httpOnly: true,
+          });
+          //tell the user that they are logged in
+          res.json("LOGGED IN");
+          //otherwise return an error message to the front end
         } else {
-          return res.send({ message: "Wrong username/password" });
+          return res.status(400).json({ message: "Wrong username/password" });
         }
       });
     }
-  });
 
-  console.log(req.body);
+    console.log(req.query);
+  });
 };

@@ -1,10 +1,12 @@
-import React from 'react';
+import React from "react";
 
-function Logout() {
-  return(<div className='logout'>
-       <h1>Logout</h1>
-
-   </div>)
+function Logout({ logoutHandler }) {
+  return (
+    <div className="logout">
+      <h1>Logout</h1>
+      <button onClick={logoutHandler}>logout</button>
+    </div>
+  );
 }
 
 export default Logout;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
 
-function Login() {
+function Login({ loginHandler }) {
   //setting state for user credentials and login error message
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,12 +14,12 @@ function Login() {
         console.log(response);
         if (response.data.message) {
           setLoginStatus(response.data.message);
-        } else {
-          setLoginStatus(response.data.username);
         }
       })
-      .catch((e) => {
-        console.log(e);
+      .catch(({ response }) => {
+        console.log(response);
+
+        setLoginStatus(response.data.message);
       });
   };
   return (
@@ -53,16 +53,18 @@ function Login() {
         <div>
           <button
             className="login-btn"
-            onClick={(e) => {
-              e.preventDefault();
-              login();
-            }}
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   login();
+            // }
+
+            onClick={loginHandler}
           >
             Login
           </button>
         </div>
       </form>
-      <div className="status">
+      <div className="login-status">
         <span>{loginStatus}</span>
       </div>
     </div>
