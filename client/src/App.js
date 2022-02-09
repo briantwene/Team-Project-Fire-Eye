@@ -12,7 +12,7 @@ import Logout from "./pages/Logout";
 
 function App() {
   //using useState for the token for auth
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
   const navigate = useNavigate();
 
   const login = () => {
