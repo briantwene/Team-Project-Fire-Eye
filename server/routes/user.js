@@ -1,8 +1,10 @@
 "use strict";
 const { Router } = require("express");
+
 // create express router
 
 const { updatePass } = require("../controllers/passController");
+
 const router = Router();
 
 //get route for fetching user details

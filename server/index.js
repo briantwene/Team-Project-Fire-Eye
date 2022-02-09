@@ -1,8 +1,11 @@
 "use strict";
 //import and start express app
 const express = require("express");
-const session = require("express-session");
+
 const app = express();
+
+//const session = require("express-session");
+
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -16,19 +19,20 @@ const auth = require("./routes/login");
 const images = require("./routes/images");
 const user = require("./routes/user");
 const login = require("./routes/login.js");
+const files = require("./routes/files.js");
 
 //configure .env file
 const dotenv = require("dotenv");
 dotenv.config();
 
 //connection to database
-mongoose
-  .connect(process.env.dbconn, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("connected to fire-eye database"))
-  .catch((err) => console.log(err));
+// mongoose
+//   .connect(process.env.dbconn, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => console.log("connected to fire-eye database"))
+//   .catch((err) => console.log(err));
 
 //express middleware for parsing json requests
 app.use(express.json());
@@ -43,9 +47,12 @@ app.use("/user", user);
 //setup routes for the cctv footage
 app.use("/footage", images);
 
+app.use("/nas", files);
+
 //route for testing
-app.get("/", (req, res) => {
-  res.send("HELLO");
+app.get("/brian", (req, res) => {
+  console.log(req);
+  res.send(req.query);
 });
 
 //set the server to listen on the port choosen

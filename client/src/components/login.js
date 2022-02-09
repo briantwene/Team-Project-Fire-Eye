@@ -8,20 +8,20 @@ function Login({ loginHandler }) {
   const [loginStatus, setLoginStatus] = useState("");
 
   //function for logging the user in when the form is submitted
-  const login = () => {
-    Axios.post("/auth/user", { username: username, password: password })
-      .then((response) => {
-        console.log(response);
-        if (response.data.message) {
-          setLoginStatus(response.data.message);
-        }
-      })
-      .catch(({ response }) => {
-        console.log(response);
+  // const login = () => {
+  //   Axios.post("/auth/user", { username: username, password: password })
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (response.data.message) {
+  //         setLoginStatus(response.data.message);
+  //       }
+  //     })
+  //     .catch(({ response }) => {
+  //       console.log(response);
 
-        setLoginStatus(response.data.message);
-      });
-  };
+  //       setLoginStatus(response.data.message);
+  //     });
+  // };
   return (
     <div className="login-container">
       <div className="logo-container">
@@ -53,12 +53,10 @@ function Login({ loginHandler }) {
         <div>
           <button
             className="login-btn"
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   login();
-            // }
-
-            onClick={loginHandler}
+            onClick={(e) => {
+              e.preventDefault();
+              loginHandler(username, password);
+            }}
           >
             Login
           </button>
