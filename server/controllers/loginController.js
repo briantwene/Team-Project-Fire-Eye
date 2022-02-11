@@ -3,6 +3,10 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const { createTokens } = require("../middleware/jwt");
 
+exports.logout = (req, res) => {
+  res.status(202).clearCookie("access-token").send({ success: "cookie cleared" });
+};
+
 exports.auth = (req, res) => {
   const { username, password } = req.body;
 
@@ -21,7 +25,7 @@ exports.auth = (req, res) => {
 
           //store the JWT as a cookie that will expire in an hour
           res.cookie("access-token", accessToken, {
-            maxAge: 60 * 1000,
+            maxAge: 60 * 60 * 1000,
             httpOnly: true,
           });
           //tell the user that they are logged in
