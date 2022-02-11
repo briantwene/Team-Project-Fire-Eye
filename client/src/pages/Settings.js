@@ -38,7 +38,7 @@ function Setting() {
           </div>
 
           <div className="password">
-            <button className="passRadius" type="button" onclick={alert("you clicked me")}>
+            <button className="passRadius" type="button">
               <h2>Change Password</h2>
             </button>
           </div>
@@ -51,7 +51,7 @@ function Setting() {
           </div>
 
           <div className="accountClose">
-            <button className="passRadius" type="button" onclick={alert("you clicked me")}>
+            <button className="passRadius" type="button">
               <h2>Close Account</h2>
             </button>
           </div>

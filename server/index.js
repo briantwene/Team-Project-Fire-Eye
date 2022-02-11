@@ -1,7 +1,6 @@
 "use strict";
 //import and start express app
 const express = require("express");
-
 const app = express();
 
 //const session = require("express-session");
@@ -20,22 +19,22 @@ const images = require("./routes/images");
 const user = require("./routes/user");
 const login = require("./routes/login.js");
 const files = require("./routes/files.js");
-
 //configure .env file
 const dotenv = require("dotenv");
 dotenv.config();
 
 //connection to database
-// mongoose
-//   .connect(process.env.dbconn, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => console.log("connected to fire-eye database"))
-//   .catch((err) => console.log(err));
+mongoose
+  .connect(process.env.dbconn, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("connected to fire-eye database"))
+  .catch((err) => console.log(err));
 
 //express middleware for parsing json requests
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(express.json({ extended: true }));
 app.use(cookieParser());
 
 //setup route for login
