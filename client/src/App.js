@@ -46,7 +46,7 @@ function App() {
       </Routes>
 
       {/* if you want to see the login uncomment this line and comment all the stuff in the Router Tag */}
-      {/* <Login /> */}
+      <Login />
     </>
   );
 }
