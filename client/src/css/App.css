@@ -384,3 +384,16 @@ span {
   padding: 20px;
   text-align: center;
 }
+.gallery__items h1 {
+  margin: 1rem;
+  padding: 20px;
+  text-align: center;
+}
+
+.master-list {
+  padding: 4rem;
+}
+
+.sublist {
+  padding-left: 2rem;
+}

@@ -16,14 +16,21 @@ const requestBaseFile = async (req, res) => {
 
 //controller for when the user is requesting a folder
 const requestFolder = async (req, res) => {
-  //
+  
   const { passedPath } = req.query;
+  console.log(req.query);
 
   //get the files in the folder
-  const FolderContents = await collectFiles(passedPath).catch((e) => {
-    console.log(`there was an error ${e}`);
-  });
+  const FolderContents = await collectFiles(passedPath)
+    .then((files) => {
+      console.log(files);
+      return files;
+    })
+    .catch((e) => {
+      console.log(`there was an error ${e}`);
+    });
   //send the fontend
+  console.log(FolderContents);
   res.send(FolderContents);
 };
 
