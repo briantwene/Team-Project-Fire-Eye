@@ -31,6 +31,14 @@ export const SidebarData = [
     icon: <FiIcons.FiSettings />,
     cName: "nav-text",
   },
+
+  {
+    title: "Upload",
+    path: "/upload",
+    icon: <AiIcons.AiOutlineCloudUpload />,
+    cName: "nav-text",
+  },
+
   {
     title: "Logout",
     path: "/logout",

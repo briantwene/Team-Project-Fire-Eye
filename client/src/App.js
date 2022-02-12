@@ -9,6 +9,7 @@ import Explorer from "./pages/Explorer";
 import Gallery from "./pages/Gallery";
 import Setting from "./pages/Settings";
 import Logout from "./pages/Logout";
+import Upload from "./pages/Upload";
 import { Axios } from "axios";
 import FolderGenerator from "./pages/Explorer";
 import { files } from "./components/foldertree";
