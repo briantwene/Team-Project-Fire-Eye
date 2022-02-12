@@ -9,6 +9,7 @@ import LiveStream from "./pages/LiveStream";
 import Gallery from "./pages/Gallery";
 import Setting from "./pages/Settings";
 import Logout from "./pages/Logout";
+import Upload from "./pages/Upload";
 import { Axios } from "axios";
 
 function App() {
@@ -23,18 +24,19 @@ function App() {
   };
   return (
     <>
-      {/* <Sidebar />
+      <Sidebar />
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/livestream" element={<LiveStream />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/settings" element={<Setting />} />
         <Route path="/logout" element={<Logout />} />
-      </Routes> */}
+        <Route path="/upload" element={<Upload/>}/>
+      </Routes>
 
       {/* This will most likely be the new Routes
       If you want to remove the login page you can comment this block and uncomment the top one... */}
-      <Routes>
+      {/* <Routes>
         <Route path="/login" element={<Login />} exact />
         <Route element={<ProtectedRoute auth={isAuth} />}>
           <Route path="/logout" element={<Logout />} />
@@ -43,7 +45,7 @@ function App() {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/settings" element={<Setting />} />
         </Route>
-      </Routes>
+      </Routes> */}
 
       {/* if you want to see the login uncomment this line and comment all the stuff in the Router Tag */}
       {/* <Login /> */}
