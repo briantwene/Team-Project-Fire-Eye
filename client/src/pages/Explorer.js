@@ -11,6 +11,11 @@ function Explorer(props) {
   //setting local state for the files..
   //getting the directory from main.
   const [files, setFiles] = useState(props.files || []);
+  const [currentView, setCurrentView] = useState(props.directory);
+
+  const setView = () => {
+    setCurrentView();
+  };
 
   //using use effect to fetch the directory when the component is rendered
 
@@ -43,33 +48,23 @@ function Explorer(props) {
 
   //return a unordered list
   return (
-    <ul className="master-list">
-      {/* if state has the file data inside the rendere the following: */}
-      {filesInFolder &&
-        //create an array with a explorer_node component from the state array
-        filesInFolder.map((file) => {
-          return file.isFolderBoolean && <Explorer_Node node={file} />;
-        })}
-      {/* {filesInFolder &&
-        filesInFolder.map((file) => {
-          const filePath = file.filePath;
-          const fileName = filePath.split("/").slice(-1).join(" ");
-          return (
-            file.isFolderBoolean && (
-              <li key={`${filePath} Directory`}>
-                {`${fileName}`}
-                <Explorer directory={file.filePath} files={file.files} />
-              </li>
-            )
-          );
-        })} */}
-    </ul>
+    <>
+      <ul className="master-list">
+        {/* if state has the file data inside the rendere the following: */}
+        {filesInFolder &&
+          //create an array with a explorer_node component from the state array
+          filesInFolder.map((file) => {
+            return file.isFolderBoolean && <Explorer_Node node={file} />;
+          })}
+      </ul>
+      <div>{currentView}</div>
+    </>
   );
 }
 
 //will be used for viewing the contents of each file
-function Explorer_View() {
-  return <div className="explorer-view"></div>;
+function Explorer_View({ view }) {
+  return <div className="explorer-view">{view}</div>;
 }
 
 const FolderGenerator = () => {

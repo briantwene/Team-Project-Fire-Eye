@@ -14,7 +14,7 @@ import { Axios } from "axios";
 import FolderGenerator from "./pages/Explorer";
 import { files } from "./components/foldertree";
 
-const directory = "C:/Users/Brian Twene/Documents/Exam Papers";
+const directory = "C:\\Users\\Brian Twene\\Dropbox\\DT080A Year 2";
 function App() {
   //using useState for the token for auth
   const [isAuth, setIsAuth] = useState(true);
@@ -33,6 +33,7 @@ function App() {
         <Route path="/explorer" element={<Explorer directory={directory} />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/settings" element={<Setting />} />
+        <Route path="/upload" element={<Upload />} />
         <Route path="/logout" element={<Logout />} />
       </Routes>
 

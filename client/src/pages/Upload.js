@@ -1,64 +1,57 @@
 // import { response } from "express";
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 function Upload() {
-    const [selectedFile, setSelectedFile] = useState();
-    const [isFilePicked, setIsFilePicked] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
+  const [isFilePicked, setIsFilePicked] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState("");
 
-
-  const changeHandler = (event) =>{
+  const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
     setIsFilePicked(true);
-  }
+  };
 
-  const handleSUbmission = () =>{
+  const handleSUbmission = () => {
     const formData = new FormData();
-    formData.append('File', selectedFile);
+    formData.append("file", selectedFile);
 
-    fetch(
-      'https://freeimage.host/api/1/upload?key=<App.js>',
-      {
-        method: 'POST',
-        body: formData,
-      }
-    )
-
+    fetch("/nas/upload", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
-      .then((result) =>{
-        console.log('Success:', result);
+      .then((result) => {
+        console.log("Success:", result);
+        setUploadStatus(result.success);
       })
+      .catch((e) => {
+        console.log(`there was an error: ${e}`);
+      });
 
-      // .catch((error)) => {
-      //   console.error('Error:', error);
-      // }
-
+    // .catch((error)) => {
+    //   console.error('Error:', error);
+    // }
   };
 
   return (
     <div>
       <input type="file" name="file" onChange={changeHandler} />
-      {isFilePicked ?(
-          <div>
-            <p>Filename: {selectedFile.name}</p>
-            <p>Filetype: {selectedFile.type}</p>
-            <p>Size in bytes: {selectedFile.size}</p>
+      {isFilePicked ? (
+        <div>
+          <p>Filename: {selectedFile.name}</p>
+          <p>Filetype: {selectedFile.type}</p>
+          <p>Size in bytes: {selectedFile.size}</p>
 
-            <p>
-              lastModifiedDate: {' '}
-              {selectedFile.lastModifiedDate.toLocaleDateString()}
-            </p>
-
-          </div>
-      ):(
+          <p>lastModifiedDate: {selectedFile.lastModifiedDate.toLocaleDateString()}</p>
+        </div>
+      ) : (
         <p>Select a file to show details</p>
-      )
-      
-    }
+      )}
       <div>
         <button onClick={handleSUbmission}>Submit</button>
       </div>
+      <div>{uploadStatus}</div>
     </div>
-
   );
 }
 
