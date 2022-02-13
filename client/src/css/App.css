@@ -436,3 +436,11 @@ h2 {
   padding: 20px;
   text-align: center;
 }
+
+.master-list {
+  padding: 4rem;
+}
+
+.sublist {
+  padding-left: 2rem;
+}

@@ -5,13 +5,16 @@ import ProtectedRoute from "./ProtectedRoute";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./components/login";
-import LiveStream from "./pages/LiveStream";
+import Explorer from "./pages/Explorer";
 import Gallery from "./pages/Gallery";
 import Setting from "./pages/Settings";
 import Logout from "./pages/Logout";
 import Upload from "./pages/Upload";
 import { Axios } from "axios";
+import FolderGenerator from "./pages/Explorer";
+import { files } from "./components/foldertree";
 
+const directory = "C:/Users/Brian Twene/Documents/Exam Papers";
 function App() {
   //using useState for the token for auth
   const [isAuth, setIsAuth] = useState(true);
@@ -27,11 +30,10 @@ function App() {
       <Sidebar />
       <Routes>
         <Route path="/" exact element={<Home />} />
-        <Route path="/livestream" element={<LiveStream />} />
+        <Route path="/explorer" element={<Explorer directory={directory} />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/settings" element={<Setting />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/upload" element={<Upload/>}/>
       </Routes>
 
       {/* This will most likely be the new Routes
