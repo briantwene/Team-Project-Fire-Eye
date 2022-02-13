@@ -1,15 +1,18 @@
-const { collectFiles } = require("../services/access");
+const { generateTree, getFiles } = require("../services/access");
 const path = require("path");
 const dotenv = require("dotenv");
 const nasPath = process.env.addr;
 const fs = require("fs/promises");
 const fs2 = require("fs");
 
-const {response} = require("express");
+const { response } = require("express");
 // controller for first entry to the app
-const requestBaseFile = async (req, res) => {
+const requestEntryPoint = async (req, res) => {
+  const { passedPath } = req.query;
+  console.log(req.query);
+
   //get the entry point to the storage that user requested
-  const files = await collectFiles(nasPath).catch((e) => {
+  const files = await generateTree(passedPath).catch((e) => {
     console.log(`there was an error: ${e}`);
   });
 
@@ -19,12 +22,11 @@ const requestBaseFile = async (req, res) => {
 
 //controller for when the user is requesting a folder
 const requestFolder = async (req, res) => {
-  
-  const { passedPath } = req.query;
+  const { folder } = req.query;
   console.log(req.query);
 
   //get the files in the folder
-  const FolderContents = await collectFiles(passedPath)
+  const FolderContents = await getFiles(folder)
     .then((files) => {
       console.log(files);
       return files;
@@ -39,49 +41,44 @@ const requestFolder = async (req, res) => {
 
 //for deleting
 
-const removeFile = async(req, res) => {
-
-  const {Files} = req.query;  
+const removeFile = async (req, res) => {
+  const { Files } = req.query;
   try {
-    await fs.unlink(Files)
-  } catch (e){
+    await fs.unlink(Files);
+  } catch (e) {
     console.log(e);
-    res.send(`There was an error: ${e}`)
+    res.send(`There was an error: ${e}`);
   }
-  res.send("Success")
-} 
+  res.send("Success");
+};
 
 //for creating
 
-const createFolder = async(req, res) => {
-  
-  const{newFolder} = req.query;
-  try{
-     await fs.mkdir(newFolder)
-  }
-  catch(e){
+const createFolder = async (req, res) => {
+  const { newFolder } = req.query;
+  try {
+    await fs.mkdir(newFolder);
+  } catch (e) {
     console.log(e);
-    return res.status(400).json({fail: `There was an error: ${e}`})
+    return res.status(400).json({ fail: `There was an error: ${e}` });
   }
-  res.send("New Folder created")
-}
+  res.send("New Folder created");
+};
 
+//Deleting a folder
 
-//Deleting a folder 
-
-const deleteFolder = async(req, res) =>{
-  const{fileDelete} = req.query;
-  try{
-    await fs.rmdir(fileDelete)
+const deleteFolder = async (req, res) => {
+  const { fileDelete } = req.query;
+  try {
+    await fs.rmdir(fileDelete);
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json({ fail: `There was an error: ${e}` });
   }
-  catch(e){
-    console.log(e)
-    return res.status(400).json({fail:`There was an error: ${e}`})
-  }
-  res.send("Folder deleted")
-}
+  res.send("Folder deleted");
+};
 
-// Downloading a file 
+// Downloading a file
 
 // const downloadAny = (req, res) =>{
 //   const{response} = req.query;
@@ -93,23 +90,22 @@ const deleteFolder = async(req, res) =>{
 //     console.log(e)
 //     return res.status(400).json({fail: `There was an error: ${e}`})
 //   }
- 
+
 // }
 
-const downloadAny = (req, res, next) =>{
-  console.log('fileController.download: starrted')
-  const{response} = req.query;
-  try{
-    const file =fs2.createReadStream(response)
-    const filename = (new Date()).toISOString()
-    res.setHeader('Content-Disposition', 'attachment: filename="' + filename + '"')
-    file.pipe(res)
+const downloadAny = (req, res, next) => {
+  console.log("fileController.download: starrted");
+  const { response } = req.query;
+  try {
+    const file = fs2.createReadStream(response);
+    const filename = new Date().toISOString();
+    res.setHeader("Content-Disposition", 'attachment: filename="' + filename + '"');
+    file.pipe(res);
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json({ fail: `There was an error: ${e}` });
   }
-  catch(e){
-    console.log(e)
-    return res.status(400).json({fail: `There was an error: ${e}`})
-  }
-}
+};
 
 //add function names in the braces
-module.exports = { requestFolder, requestBaseFile, removeFile, createFolder, deleteFolder,downloadAny };
+module.exports = { requestFolder, requestEntryPoint, removeFile, createFolder, deleteFolder, downloadAny };
