@@ -1,7 +1,13 @@
 .master-list {
-  padding: 4rem;
+  width: 50%;
 }
 
 .sublist {
   padding-left: 2rem;
+}
+
+.explorer {
+  margin: 3rem;
+  display: flex;
+  flex-direction: row;
 }

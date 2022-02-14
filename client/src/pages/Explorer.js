@@ -11,6 +11,12 @@ function Explorer(props) {
   //setting local state for the files..
   //getting the directory from main.
   const [files, setFiles] = useState(props.files || []);
+  const [currentView, setCurrentView] = useState(props.directory);
+  const [contents, setContents] = useState([]);
+
+  const setView = (path) => {
+    setCurrentView(path);
+  };
 
   //using use effect to fetch the directory when the component is rendered
 
@@ -31,10 +37,30 @@ function Explorer(props) {
       });
   };
 
+  const fetchPage = () => {
+    axios
+      .get("/nas/changeDir", {
+        params: {
+          folder: currentView,
+        },
+      })
+      .then((pageContents) => {
+        setContents(pageContents.data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
   //using useEffect to fetch the data once the component has rendered
   useEffect(() => {
     fetchFolders();
   }, []);
+
+  useEffect(() => {
+    fetchPage();
+    fetchPage();
+  }, [currentView]);
 
   //rendering the tree
 
@@ -43,33 +69,41 @@ function Explorer(props) {
 
   //return a unordered list
   return (
-    <ul className="master-list">
-      {/* if state has the file data inside the rendere the following: */}
-      {filesInFolder &&
-        //create an array with a explorer_node component from the state array
-        filesInFolder.map((file) => {
-          return file.isFolderBoolean && <Explorer_Node node={file} />;
-        })}
-      {/* {filesInFolder &&
-        filesInFolder.map((file) => {
-          const filePath = file.filePath;
-          const fileName = filePath.split("/").slice(-1).join(" ");
-          return (
-            file.isFolderBoolean && (
-              <li key={`${filePath} Directory`}>
-                {`${fileName}`}
-                <Explorer directory={file.filePath} files={file.files} />
-              </li>
-            )
-          );
-        })} */}
-    </ul>
+    <>
+      <div className="explorer">
+        <ul className="master-list">
+          {/* if state has the file data inside the rendere the following: */}
+          {filesInFolder &&
+            //create an array with a explorer_node component from the state array
+            filesInFolder.map((file) => {
+              return file.isFolderBoolean && <Explorer_Node node={file} setfunc={setView} />;
+            })}
+        </ul>
+        <div>
+          {currentView}
+          <ul>
+            {contents &&
+              contents.map((file) => {
+                return (
+                  <li>
+                    <span>{file.name}</span>
+                    <span>{file.path}</span>
+                    <span>{file.details.time}</span>
+                    <span>{file.details.size}</span>
+                    <span>{file.type}</span>
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
+      </div>
+    </>
   );
 }
 
 //will be used for viewing the contents of each file
-function Explorer_View() {
-  return <div className="explorer-view"></div>;
+function Explorer_View({ view }) {
+  return <div className="explorer-view">{view}</div>;
 }
 
 const FolderGenerator = () => {
@@ -77,10 +111,10 @@ const FolderGenerator = () => {
 };
 
 //function for rendering the directory tree
-function Explorer_Node({ node }) {
+function Explorer_Node({ node, setfunc }) {
   //create a state variable that acts as a flag for weather the sub folder is visible
   const [filesVisible, setFileVisiblity] = useState(false);
-
+  console.log(setfunc);
   //check if the node prop has files inside its folder
   const hasChild = node.files ? true : false;
 
@@ -91,6 +125,7 @@ function Explorer_Node({ node }) {
       <div
         onClick={(e) => {
           setFileVisiblity((b) => !b);
+          setfunc(node.filePath);
         }}
       >
         {/* if the folder has files in it then change to active state */}
@@ -104,7 +139,7 @@ function Explorer_Node({ node }) {
         <div>
           <ul>
             {node.files.map((file) => {
-              return file.isFolderBoolean && <Explorer_Node node={file} />;
+              return file.isFolderBoolean && <Explorer_Node node={file} setfunc={setfunc} />;
             })}
           </ul>
         </div>

@@ -15,43 +15,60 @@ const isFolder = (filepath) => {
   return isFolder === "" ? "Folder" : isFolder;
 };
 //this code will run asynchronously
-const imageDates = async (filepath) => {
-  // return new Promise(async (resolve) => {
-  //   resolve({
-  //     name: path.basename(filepath),
-  //     path: filepath,
-  //     details: await fs.stat(filepath).then((stat) => {
-  //       console.log();
-  //       return {
-  //         time: stat.mtime,
-  //         size: stat.size,
-  //       };
-  //     }),
-  //     type: isFolder(filepath),
-  //   });
-  // });
-
-  return fs.stat(filepath).then((fileData) => {
-    const file = {};
-    file.filePath = filepath;
-    file.isFileBoolean = fileData.isFile();
-
-    if (file.isFileBoolean) {
-      return collectFiles(file.filePath)
-        .then((fileNameSub) => {
-          file.files = fileNameSub;
-        })
-        .catch(console.error);
-    }
-    console.log(file);
-    return file;
+const fileInfo = async (filepath) => {
+  return new Promise(async (resolve) => {
+    resolve({
+      name: path.basename(filepath),
+      path: filepath,
+      details: await fs.stat(filepath).then((stat) => {
+        console.log();
+        return {
+          time: stat.mtime,
+          size: stat.size,
+        };
+      }),
+      type: isFolder(filepath),
+    });
   });
+};
+
+const getFiles = async (address) => {
+  //create an array to store all the promises
+  const promiseArray = [];
+
+  //getting all the images from the folder
+  const absoluteLinks = await fs
+    .readdir(address)
+    .then((results) => {
+      console.log(results);
+
+      const merged = results.map((relative) => {
+        return `${address}/${relative}`;
+      });
+      return merged;
+    })
+    .catch((e) => {
+      console.log(`there was an error ${e}`);
+    });
+
+  console.log(absoluteLinks);
+
+  //fill the array with promises that will return info on that image
+  for (const link of absoluteLinks) {
+    promiseArray.push(fileInfo(link));
+  }
+
+  //wait for all the images to have their modified time and name added
+  const completed = Promise.all(promiseArray);
+
+  //return the array of images to the front-end
+  return completed;
 };
 
 //service function for getting the images out of file that they are in
 //the result is then returned to the controller that called it
 
-const collectFiles = async (directoryString) => {
+const generateTree = async (directoryString) => {
   //read the directory
   const arrayOfFileNameStrings = await fs.readdir(directoryString);
 
@@ -66,7 +83,7 @@ const collectFiles = async (directoryString) => {
     //if the file is a folder
     if (file.isFolderBoolean) {
       //call the folder again to get its contents
-      file.files = await collectFiles(file.filePath);
+      file.files = await generateTree(file.filePath);
     }
     /* End recursive condition */
     return file;
@@ -74,4 +91,4 @@ const collectFiles = async (directoryString) => {
   return Promise.all(fileData);
 };
 
-module.exports = { collectFiles };
+module.exports = { generateTree, getFiles };

@@ -1,24 +1,19 @@
 // import { response } from "express";
 import React, { useState } from "react";
-import { files } from "../components/foldertree";
 
 function Upload() {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState("");
 
   const changeHandler = (event) => {
-    setSelectedFile(event.target.files);
-    console.log(event.target.files);
+    setSelectedFile(event.target.files[0]);
     setIsFilePicked(true);
   };
 
   const handleSUbmission = () => {
     const formData = new FormData();
-
-    for (let i = 0; i < selectedFile.length; i++) {
-      formData.append(`File[${i}]`, selectedFile[i]);
-    }
-    // formData.append('File', selectedFile);
+    formData.append("file", selectedFile);
 
     fetch("/nas/upload", {
       method: "POST",
@@ -27,6 +22,10 @@ function Upload() {
       .then((response) => response.json())
       .then((result) => {
         console.log("Success:", result);
+        setUploadStatus(result.success);
+      })
+      .catch((e) => {
+        console.log(`there was an error: ${e}`);
       });
 
     // .catch((error)) => {
@@ -36,16 +35,14 @@ function Upload() {
 
   return (
     <div>
-      {/* <form method="post" enctype="multipart/form-data"> */}
-      <input type="file" name="files" onChange={changeHandler} multiple />
-      {/* </form> */}
+      <input type="file" name="file" onChange={changeHandler} />
       {isFilePicked ? (
         <div>
           <p>Filename: {selectedFile.name}</p>
           <p>Filetype: {selectedFile.type}</p>
           <p>Size in bytes: {selectedFile.size}</p>
 
-          <p>lastModifiedDate: {selectedFile.lastModifiedDate}</p>
+          <p>lastModifiedDate: {selectedFile.lastModifiedDate.toLocaleDateString()}</p>
         </div>
       ) : (
         <p>Select a file to show details</p>
@@ -53,6 +50,7 @@ function Upload() {
       <div>
         <button onClick={handleSUbmission}>Submit</button>
       </div>
+      <div>{uploadStatus}</div>
     </div>
   );
 }
