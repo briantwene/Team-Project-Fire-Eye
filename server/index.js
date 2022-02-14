@@ -24,15 +24,15 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 //connection to database
-mongoose
-  .connect(process.env.dbconn, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("connected to fire-eye database"))
-  .catch((err) => console.log(err));
+// mongoose.connect(process.env.dbconn, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => console.log("connected to fire-eye database"))
+//   .catch((err) => console.log(err));
 
 //express middleware for parsing json requests
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json({ extended: true }));
 app.use(cookieParser());
