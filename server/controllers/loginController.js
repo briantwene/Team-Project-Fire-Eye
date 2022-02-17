@@ -1,4 +1,4 @@
-const passport = require("passport");
+
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const { createTokens } = require("../middleware/jwt");
@@ -8,14 +8,13 @@ exports.logout = (req, res) => {
 };
 
 exports.auth = (req, res) => {
-  const { username, password } = req.body;
+  const { username, password } = req.query;
 
   User.findOne({ username: username }, (err, user) => {
     //if user doesnt exist or there is an error then send error message
     if (!user) {
       res.status(400).json({ message: "user doesnt exist" });
     } else {
-      //see if can be made into a promise....
       //otherwise compare the password with that in the database
       bcrypt.compare(password, user.password).then((isMatch) => {
         //if there is a match

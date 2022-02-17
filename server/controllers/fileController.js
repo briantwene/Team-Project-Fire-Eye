@@ -1,4 +1,4 @@
-const { generateTree, getFiles } = require("../services/access");
+const { generateTree, getFiles, getFileStats } = require("../services/access");
 const path = require("path");
 const dotenv = require("dotenv");
 const nasPath = process.env.addr;
@@ -93,11 +93,12 @@ const deleteFolder = async (req, res) => {
 
 // }
 
-const downloadAny = (req, res, next) => {
+const downloadAny = (req, res) => {
   console.log("fileController.download: starrted");
-  const { response } = req.query;
+  const { filePath } = req.query;
+  console.log(req.query);
   try {
-    const file = fs2.createReadStream(response);
+    const file = fs2.createReadStream(filePath);
     const filename = new Date().toISOString();
     res.setHeader("Content-Disposition", 'attachment: filename="' + filename + '"');
     file.pipe(res);
@@ -107,5 +108,12 @@ const downloadAny = (req, res, next) => {
   }
 };
 
+const requestStats = async (req, res) => {
+  const { passedPath } = req.query;
+
+  const files = await getFileStats(passedPath);
+  res.send(files);
+};
+
 //add function names in the braces
-module.exports = { requestFolder, requestEntryPoint, removeFile, createFolder, deleteFolder, downloadAny };
+module.exports = { requestFolder, requestEntryPoint, removeFile, createFolder, deleteFolder, downloadAny, requestStats };

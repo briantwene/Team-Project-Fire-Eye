@@ -1,13 +1,180 @@
-.master-list {
-  width: 50%;
+@use "sass:color";
+
+//explorer component
+.explorer {
+  height: 90%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 1fr;
+
+  //file tree component general
+  .explorer_tree {
+    grid-column: 1/4;
+    list-style-type: none;
+    border-right: 1px solid rgb(212, 212, 212);
+    overflow: auto;
+
+    .folderName {
+      font-size: em(20);
+      margin-left: 1em;
+      display: flex;
+      align-items: center;
+
+      .folderName-text {
+        margin-left: 1rem;
+      }
+    }
+
+    //nested trees
+    .subtree {
+      list-style-type: none;
+    }
+  }
+
+  .view-grid-outer {
+    grid-column: 4/13;
+    display: flex;
+    flex-direction: column;
+
+    .cd-info {
+      max-height: 20%;
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      border-bottom: 1px solid rgb(212, 212, 212);
+
+      & > * {
+        margin: 1em 1em;
+      }
+
+      .pathCrumb:nth-child(odd) {
+        height: 100%;
+        cursor: pointer;
+      }
+
+      .pathCrumb:hover {
+        background-color: $sidebarIcon;
+        color: white;
+      }
+    }
+
+    .view-grid-inner {
+      max-height: 80%;
+      width: 100%;
+      justify-self: center;
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      top: 0;
+      bottom: 0;
+      z-index: 0;
+      overflow: auto;
+    }
+
+    .fileItem {
+      font-size: em(20);
+      width: 10%;
+      margin: 1rem;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      &:hover {
+        background-color: rgb(192, 192, 192);
+        cursor: pointer;
+      }
+
+      .filename {
+        display: block;
+        line-break: anywhere;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+        text-align: center;
+      }
+
+      .fileIcon {
+        font-size: em(40);
+        color: $logotext;
+      }
+    }
+  }
+
+  @include breakpoint(mobileonly) {
+    .view-grid-outer {
+      grid-column: 1/13;
+    }
+    .explorer_tree {
+      display: none;
+    }
+  }
 }
 
 .sublist {
-  padding-left: 2rem;
+  cursor: pointer;
+  margin: 1rem;
+  .subfolder {
+    display: flex;
+    &:hover {
+      background-color: $logotext;
+      color: white;
+    }
+  }
+
+  .subtree-container {
+    margin-left: 1rem;
+  }
 }
 
-.explorer {
-  margin: 3rem;
+.fileInfo-container {
+  background-color: rgba(0, 0, 0, 0.212);
+  height: 90%;
+  width: 100%;
+  position: fixed;
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  top: 10%;
+  bottom: 0;
+  z-index: 1;
+
+  .fileInfo {
+    background-color: white;
+    border-radius: 5px;
+    width: 50%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+
+    table {
+      margin: 1em;
+    }
+    th,
+    td {
+      padding: 1em;
+      text-align: left;
+    }
+
+    .download {
+      margin: 1em;
+      width: 50%;
+      align-self: center;
+      padding: 1em;
+      border: none;
+      border-radius: 5px;
+      font-size: em(20);
+      background-color: $sidebar;
+      color: white;
+      border: none;
+      cursor: pointer;
+
+      //change the color of the login when the user hovers
+      //over the button
+      &:hover {
+        background-color: color.adjust($sidebar, $blue: -20);
+      }
+    }
+  }
 }

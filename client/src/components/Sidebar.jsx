@@ -19,11 +19,11 @@ function Sidebar() {
     <IconContext.Provider value={{color: '#fff'}}>
       <div className="Sidebar">
         <div className='username'>
-        <h1>Hi FireEye</h1>
+        <h1></h1>
         </div>
         
       <Link to="#" className='menu-bars'>
-        <FaIcons.FaBars style={{color:'#D9843B'}} onClick={shownavbar} />
+        <FaIcons.FaBars  onClick={shownavbar} />
       </Link>
 
       </div>
@@ -45,7 +45,7 @@ function Sidebar() {
             <li key={index} className={item.cName}>
               <Link to={item.path}>
                 {item.icon}
-                <span>{item.title}</span>
+                <span className='sidebar_item_title'>{item.title}</span>
               </Link>
 
             </li> 

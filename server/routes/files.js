@@ -1,13 +1,16 @@
 const { Router } = require("express");
 const multer = require("multer");
 //import from herer
-const { requestFolder, requestEntryPoint, removeFile, createFile, createFolder, deleteFolder, downloadAny } = require("../controllers/fileController");
+const { requestFolder, requestEntryPoint, removeFile, createFile, createFolder, deleteFolder, downloadAny, requestStats } = require("../controllers/fileController");
 
 const { fileUpload } = require("../controllers/loadController");
 const { fileStorageEngine } = require("../middleware/storage");
+const { getFileStats } = require("../services/access");
 const router = Router();
 
 const upload = multer({ storage: fileStorageEngine });
+
+router.get("/storeinfo", requestStats);
 
 // route: nas/....
 router.get("/gather", requestEntryPoint);

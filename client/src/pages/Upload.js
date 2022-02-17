@@ -8,6 +8,7 @@ function Upload() {
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
+    console.log(event.target.files)
     setIsFilePicked(true);
   };
 
@@ -42,7 +43,7 @@ function Upload() {
           <p>Filetype: {selectedFile.type}</p>
           <p>Size in bytes: {selectedFile.size}</p>
 
-          <p>lastModifiedDate: {selectedFile.lastModifiedDate.toLocaleDateString()}</p>
+          <p>lastModifiedDate: {selectedFile.ModifiedDate}</p>
         </div>
       ) : (
         <p>Select a file to show details</p>
