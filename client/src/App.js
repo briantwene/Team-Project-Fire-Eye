@@ -32,6 +32,8 @@ function App() {
         <Route path="/" exact element={<Home />} />
         <Route path="/explorer" element={<Explorer directory={directory} />} />
         <Route path="/gallery" element={<Gallery />} />
+
+        <Route path="/upload" element={<Upload />} />
         <Route path="/settings" element={<Setting />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/logout" element={<Logout />} />

@@ -3,8 +3,6 @@
 const express = require("express");
 const app = express();
 
-
-
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
@@ -21,15 +19,15 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 //connection to database
-mongoose
-  .connect(process.env.dbconn, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })  
-  .then(() => console.log("connected to fire-storage database"))
-  .catch((err) => console.log(err));
+// mongoose.connect(process.env.dbconn, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => console.log("connected to fire-eye database"))
+//   .catch((err) => console.log(err));
 
 //express middleware for parsing json requests
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json({ extended: true }));
 app.use(cookieParser());
@@ -39,7 +37,6 @@ app.use("/auth", login);
 
 //setup route for user profile
 app.use("/user", user);
-
 
 app.use("/nas", files);
 
