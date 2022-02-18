@@ -1,9 +1,11 @@
 import axios from "axios";
 import React from "react";
 import { saveAs } from "file-saver";
+import bytes from "bytes";
+import * as FaIcons from "react-icons/fa";
 
 function FileInfo({ file, setModal }) {
-  const download = (file, name, type) => {
+  const download = (file = "", name = "", type = "") => {
     axios
       .get("/nas/download", {
         params: {
@@ -37,11 +39,11 @@ function FileInfo({ file, setModal }) {
           <tr>
             <th>Date Modified:</th>
 
-            <td>{file.details.time}</td>
+            <td>{new Date(file.details.time).toLocaleDateString}</td>
           </tr>
           <tr>
             <th>Size:</th>
-            <td>{file.details.size}</td>
+            <td>{bytes(file.details.size)}</td>
           </tr>
           <tr>
             <th>Type:</th>

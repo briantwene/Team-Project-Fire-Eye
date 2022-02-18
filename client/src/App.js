@@ -14,7 +14,7 @@ import { Axios } from "axios";
 import FolderGenerator from "./pages/Explorer";
 import { files } from "./components/foldertree";
 
-const directory = "C:/Users/Brian Twene/Documents/DT080A-Year-3";
+const directory = "\\\\172.20.10.6\\nas";
 function App() {
   //using useState for the token for auth
   const [isAuth, setIsAuth] = useState(true);
@@ -27,7 +27,7 @@ function App() {
   };
   return (
     <>
-      <Sidebar />
+      {/* <Sidebar />
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/explorer" element={<Explorer directory={directory} />} />
@@ -37,20 +37,18 @@ function App() {
         <Route path="/settings" element={<Setting />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/logout" element={<Logout />} />
-      </Routes>
+      </Routes> */}
 
       {/* This will most likely be the new Routes
       If you want to remove the login page you can comment this block and uncomment the top one... */}
-      {/* <Routes>
+      <Routes>
         <Route path="/login" element={<Login />} exact />
         <Route element={<ProtectedRoute auth={isAuth} />}>
+          <Route path="/" element={<Explorer directory={directory} />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/livestream" element={<LiveStream />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/settings" element={<Setting />} />
+          <Route path="/upload" element={<Upload />} />
         </Route>
-      </Routes> */}
+      </Routes>
 
       {/* if you want to see the login uncomment this line and comment all the stuff in the Router Tag */}
       {/* <Login /> */}

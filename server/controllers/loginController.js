@@ -1,4 +1,3 @@
-
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const { createTokens } = require("../middleware/jwt");
@@ -8,7 +7,7 @@ exports.logout = (req, res) => {
 };
 
 exports.auth = (req, res) => {
-  const { username, password } = req.query;
+  const { username, password } = req.body;
 
   User.findOne({ username: username }, (err, user) => {
     //if user doesnt exist or there is an error then send error message

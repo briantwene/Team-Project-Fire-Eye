@@ -1,4 +1,4 @@
-const { generateTree, getFiles, getFileStats } = require("../services/access");
+const { generateTree, getFiles, getFileStats, DiskStats } = require("../services/access");
 const path = require("path");
 const dotenv = require("dotenv");
 const nasPath = process.env.addr;
@@ -111,7 +111,7 @@ const downloadAny = (req, res) => {
 const requestStats = async (req, res) => {
   const { passedPath } = req.query;
 
-  const files = await getFileStats(passedPath);
+  const files = await DiskStats(passedPath);
   res.send(files);
 };
 

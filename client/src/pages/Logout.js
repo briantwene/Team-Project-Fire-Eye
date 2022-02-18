@@ -22,8 +22,8 @@ function Logout() {
   useEffect(() => logout());
   return (
     <div className="logout">
-      <h1>Logout</h1>
-      <span>Logging you out</span>
+      <h1>Logging Out</h1>
+      
     </div>
   );
 }

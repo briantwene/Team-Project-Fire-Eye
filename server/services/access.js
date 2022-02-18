@@ -6,6 +6,10 @@ const path = require("path");
 const dotenv = require("dotenv");
 const { resolve } = require("path");
 const { stat } = require("fs");
+const mime = require("mime-types");
+const bytes = require("bytes");
+const { types } = require("../utils/mimeType");
+const si = require("systeminformation");
 dotenv.config();
 //test link for file system
 //const address = process.env.addr;
@@ -27,7 +31,7 @@ const fileInfo = async (filepath) => {
         return {
           time: stat.mtime,
           size: stat.size,
-          type: stat.isDirectory() ? "Folder" : `${path.extname(filepath)}`.slice(1)
+          type: stat.isDirectory() ? "Folder" : `${path.extname(filepath)}`.slice(1),
         };
       }),
     });
@@ -74,7 +78,7 @@ const generateTree = async (directoryString) => {
   //read the directory
   const arrayOfFileNameStrings = await fs.readdir(directoryString);
 
-  //for each file in the list of files 
+  //for each file in the list of files
   const fileData = arrayOfFileNameStrings.map(async (fileNameString) => {
     //get the full path and check of its a folder
     const fullPath = `${directoryString}/${fileNameString}`;
@@ -83,19 +87,20 @@ const generateTree = async (directoryString) => {
     file.filePath = fullPath;
     file.isFolderBoolean = fileData.isDirectory();
     file.name = fullPath.split("/").slice(-1).join(" ");
-  
+
     //if the file is a folder
     if (file.isFolderBoolean) {
       //call the folder again to get its contents using recursion
       file.files = await generateTree(file.filePath);
     }
-    //End recursive condition 
+    //End recursive condition
     return file;
   });
   //return a list of promises waiting to be resolved
   return Promise.all(fileData);
 };
 
+//get file
 const getFileStats = async (dir, filelist = []) => {
   const files = await fs.readdir(dir);
 
@@ -111,21 +116,28 @@ const getFileStats = async (dir, filelist = []) => {
   }
 
   return filelist;
-
-  // const filesInDirectory = await fs.readdir(directoryPath);
-  // const files = await Promise.all(
-  //   filesInDirectory.map(async (file) => {
-  //     const filePath = path.join(directoryPath, file);
-  //     const stats = await fs.stat(filePath);
-
-  //     if (stats.isDirectory()) {
-  //       return getFileStats(filePath);
-  //     } else {
-  //       return filePath;
-  //     }
-  //   })
-  // );
-  // return files.filter((file) => file.length); // return with empty arrays removed
 };
 
-module.exports = { generateTree, getFiles, getFileStats };
+const DiskStats = async (basePath) => {
+  const fileTypes = {
+    audio: [],
+    video: [],
+    image: [],
+    document: [],
+    other: [],
+  };
+
+  //read the directory
+  const files = await getFileStats(basePath);
+
+  for (const file of files) {
+    fileTypes[types[mime.lookup(file)] || "other"].push(file);
+  }
+
+  console.log(mime.lookup(".docx"));
+  si.fsSize().then(console.log);
+
+  return fileTypes;
+};
+
+module.exports = { generateTree, getFiles, DiskStats };

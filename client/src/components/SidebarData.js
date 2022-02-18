@@ -12,25 +12,25 @@ export const SidebarData = [
     icon: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
-  {
-    title: "Explorer",
-    path: "/explorer",
-    icon: <AiIcons.AiFillEye />,
-    cName: "nav-text",
-  },
-  {
-    title: "Gallery",
-    path: "/gallery",
-    icon: <MdIcons.MdOutlineMonochromePhotos />,
+  // {
+  //   title: "Explorer",
+  //   path: "/explorer",
+  //   icon: <AiIcons.AiFillEye />,
+  //   cName: "nav-text",
+  // },
+  // {
+  //   title: "Gallery",
+  //   path: "/gallery",
+  //   icon: <MdIcons.MdOutlineMonochromePhotos />,
 
-    cName: "nav-text",
-  },
-  {
-    title: "Settings",
-    path: "/settings",
-    icon: <FiIcons.FiSettings />,
-    cName: "nav-text",
-  },
+  //   cName: "nav-text",
+  // },
+  // {
+  //   title: "Settings",
+  //   path: "/settings",
+  //   icon: <FiIcons.FiSettings />,
+  //   cName: "nav-text",
+  // },
 
   {
     title: "Upload",

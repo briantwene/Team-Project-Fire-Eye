@@ -1,5 +1,6 @@
 // import { response } from "express";
 import React, { useState } from "react";
+const bytes = require("bytes");
 
 function Upload() {
   const [selectedFile, setSelectedFile] = useState();
@@ -8,7 +9,7 @@ function Upload() {
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0]);
-    console.log(event.target.files)
+    console.log(event.target.files);
     setIsFilePicked(true);
   };
 
@@ -41,7 +42,7 @@ function Upload() {
         <div>
           <p>Filename: {selectedFile.name}</p>
           <p>Filetype: {selectedFile.type}</p>
-          <p>Size in bytes: {selectedFile.size}</p>
+          <p>Size in bytes: {bytes(selectedFile.size)}</p>
 
           <p>lastModifiedDate: {selectedFile.ModifiedDate}</p>
         </div>

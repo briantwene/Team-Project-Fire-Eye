@@ -17,17 +17,17 @@ const files = require("./routes/files.js");
 //configure .env file
 const dotenv = require("dotenv");
 dotenv.config();
+const path = require("path")
+
 
 //connection to database
-// mongoose.connect(process.env.dbconn, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => console.log("connected to fire-eye database"))
-//   .catch((err) => console.log(err));
+mongoose.connect(process.env.dbconn, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }).then(() => console.log("connected to fire-eye database")).catch((err) => console.log(err));
 
 //express middleware for parsing json requests
-app.use(cors());
+app.use(express.static(path.resolve(__dirname, "../client/build")));
 app.use(bodyParser.json());
 app.use(express.json({ extended: true }));
 app.use(cookieParser());
@@ -44,6 +44,10 @@ app.use("/nas", files);
 app.get("/brian", (req, res) => {
   console.log(req);
   res.send("Hello");
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
 
 //set the server to listen on the port choosen

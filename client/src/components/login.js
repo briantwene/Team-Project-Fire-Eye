@@ -57,7 +57,7 @@ function Login() {
 
         <div className="form-field">
           <p className="label">password</p>
-          <input type="text" className="field" onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" className="field" onChange={(e) => setPassword(e.target.value)} />
         </div>
 
         <div>

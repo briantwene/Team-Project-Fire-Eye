@@ -54,8 +54,7 @@
       }
 
       .pathCrumb:hover {
-        background-color: $sidebarIcon;
-        color: white;
+        text-decoration: underline;
       }
     }
 
@@ -144,9 +143,10 @@
     background-color: white;
     border-radius: 5px;
     width: 50%;
-    height: 60%;
+    max-height: 90%;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 
     table {
       margin: 1em;
@@ -175,6 +175,15 @@
       &:hover {
         background-color: color.adjust($sidebar, $blue: -20);
       }
+    }
+
+    .close-modal {
+      background-color: red;
+      color: white;
+      border: none;
+      font-size: em(24);
+      width: 10%;
+      align-self: flex-end;
     }
   }
 }
